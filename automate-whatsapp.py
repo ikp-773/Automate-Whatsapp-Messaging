@@ -38,8 +38,8 @@ def send_whatsapp(driver, name, phone_no, text):
 
 def main():
     is_connected()
-    # Using Chrome web driver and passing path to the chromerdriver.exe file
-    driver = webdriver.Chrome(executable_path = r'/mnt/c/Users/USER/chromedriver_win32/chromedriver.exe')
+    # Using Chrome web driver 
+    driver = webdriver.Chrome(executable_path=r'chromedriver/chromedriver')
     driver.get('http://web.whatsapp.com')
     sleep(10)
 
@@ -48,11 +48,12 @@ def main():
 
     for i in range(total):
         name = data.at[i, 'Name']
+        reg_no = data.at[i,'Reg Number']
+        msg = data.at[i, 'Message']
         phoneNo = data.at[i, 'Contact Number']
         if len(str(phoneNo)) == 10:
                 phoneNo = '91' + str(phoneNo)
-        msg = "Hey " + name + """,
-                \n*Add any message* """
+        msg = "Hey " + name + ",\nYour register number is "+ reg_no +". Please update the " + msg
         send_whatsapp(driver, name, phoneNo, msg)
 
 if __name__ == '__main__':
